@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center">MERN Todo App</h2>
+      <h2 className="text-center">TaskNest</h2>
 
       <div className="input-group">
         <input className="form-control"
