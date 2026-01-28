@@ -34,20 +34,20 @@ const TodoSchema = new mongoose.Schema({
 
 const Todo = mongoose.model("Todo", TodoSchema);
 
-// 🔹 Create task
+//Create task
 app.post("/todos", async (req, res) => {
   const todo = new Todo(req.body);
   await todo.save();
   res.json(todo);
 });
 
-// 🔹 Get all tasks
+//Get all tasks
 app.get("/todos", async (req, res) => {
   const todos = await Todo.find();
   res.json(todos);
 });
 
-// 🔹 Update task (edit / complete)
+//Update task (edit / complete)
 app.put("/todos/:id", async (req, res) => {
   const updated = await Todo.findByIdAndUpdate(
     req.params.id,
@@ -57,7 +57,7 @@ app.put("/todos/:id", async (req, res) => {
   res.json(updated);
 });
 
-// 🔹 Delete task
+//Delete task
 app.delete("/todos/:id", async (req, res) => {
   await Todo.findByIdAndDelete(req.params.id);
   res.json({ message: "Deleted" });
