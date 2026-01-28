@@ -75,7 +75,7 @@ function App() {
 
   return (
     <div className="container mt-5 mb-5">
-      <h2 className="text-center mb-4">My Modern Todo App</h2>
+      <h2 className="text-center mb-4">TaskNest</h2>
 
       {/* Search */}
       <input
