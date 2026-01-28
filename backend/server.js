@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://Raviya:Raviyatask321@cluster0.nuub8uv.mongodb.net/?appName=Cluster0");
+mongoose.connect("mongodb+srv://Raviya:Raviyatask321123@cluster0.nuub8uv.mongodb.net/?appName=Cluster0");
 
 
 
