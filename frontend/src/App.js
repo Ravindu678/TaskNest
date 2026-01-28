@@ -1,71 +1,19 @@
-/*import { useEffect, useState } from "react";
-
-function App() {
-  const [todos, setTodos] = useState([]);
-  const [text, setText] = useState("");
-
-  useEffect(() => {
-    fetch("http://localhost:5000/todos")
-      .then(res => res.json())
-      .then(data => setTodos(data));
-  }, []);
-
-  const addTodo = () => {
-    fetch("http://localhost:5000/todos", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text })
-    })
-    .then(res => res.json())
-    .then(todo => {
-      setTodos([...todos, todo]);
-      setText("");
-    });
-  };
-
-  const deleteTodo = id => {
-    fetch(`http://localhost:5000/todos/${id}`, { method: "DELETE" })
-      .then(() => setTodos(todos.filter(t => t._id !== id)));
-  };
-
-  return (
-    <div className="container mt-5">
-      <h2 className="text-center">TaskNest</h2>
-
-      <div className="input-group">
-        <input className="form-control"
-          value={text}
-          onChange={e => setText(e.target.value)}
-          placeholder="New task" />
-        <button className="btn btn-primary" onClick={addTodo}>Add</button>
-      </div>
-
-      <ul className="list-group mt-3">
-        {todos.map(todo => (
-          <li key={todo._id} className="list-group-item d-flex justify-content-between">
-            {todo.text}
-            <button className="btn btn-danger btn-sm"
-              onClick={() => deleteTodo(todo._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default App;*/
 
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+
+  const [search, setSearch] = useState("");
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [dueDate, setDueDate] = useState("");
   const [editId, setEditId] = useState(null);
+ 
+
 
 
   // Load tasks
@@ -131,6 +79,13 @@ function App() {
     <div className="container mt-4">
       <h2>Todo App (v2)</h2>
 
+       <input
+      className="form-control mb-3"
+      placeholder="Search tasks..."
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+/>
+
       {/* Add Task */}
       <input className="form-control mb-2"
         placeholder="Title"
@@ -167,7 +122,12 @@ function App() {
 
       
       {/* Task List */}
-      {tasks.map(task => (
+      {tasks
+  .filter(task =>
+    task.title && task.title.toLowerCase().includes(search.toLowerCase())
+  )
+  .map(task => (
+
         <div key={task._id} className="card mb-2 p-2">
           <h5>{task.title}</h5>
           <p>{task.description}</p>
